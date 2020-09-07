@@ -1,0 +1,54 @@
+<form style="box-shadow:3px 3px 10px 6px rgba(0, 0, 0, 0.616); background-color: #0a101a; color: aliceblue;" role="form"
+    method="POST" action="{{ action_path }}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+    {% comment %} Display Messages {% endcomment %}
+    {% if messages %}
+    <div class="form-group">
+        <div class="col-12">
+            {% for message in messages %}
+            {% if message.tags == "error" %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% elif message.tags == "success" %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <div style="background-color: #0a101a; color: aliceblue;" class="card-body">
+
+        {% comment %} Adding Form with All inputs Here {% endcomment %}
+
+        {% for field in form %}
+        <div class="form-group">
+
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+
+        </div>
+        {% endfor %%}
+
+
+
+
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary">{{ button_text }}</button>
+    </div>
+</form>
